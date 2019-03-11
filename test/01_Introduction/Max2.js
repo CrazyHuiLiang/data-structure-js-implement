@@ -1,4 +1,4 @@
-const max2 = require('../src/Max2');
+const max2 = require('../../src/01_Introduction/Max2');
 
 const unsortedArray = [1, 3, 5, 4, 8, 9, 7, 2, 6, 10, 11, 12, 13, 14, 15];
 for (let i = 0; i < 100000000; i++) {

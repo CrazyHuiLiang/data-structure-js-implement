@@ -1,7 +1,7 @@
 const {
     sum,
     sum2,
-} = require('../src/Sum');
+} = require('../../src/01_Introduction/Sum');
 
 
 const unsortedArray = [1, 3, 5, 4, 8, 9, 7, 2, 6, 10];

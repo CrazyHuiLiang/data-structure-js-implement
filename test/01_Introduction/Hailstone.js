@@ -1,4 +1,4 @@
-const {hailstone} = require('../src/Hailstone');
+const {hailstone} = require('../../src/01_Introduction/Hailstone');
 
 console.log(hailstone(7));
 console.log(hailstone(17));
