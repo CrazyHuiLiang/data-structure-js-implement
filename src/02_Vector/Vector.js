@@ -236,7 +236,7 @@ class Vector {
     // * T 为可比较的基本类型
     fibSearch(e, l, h) {
         while (l < h) { // 每步迭代可能要做两次比较判断，有三个分支
-            const mi = Math.floor((l + h) * 0.618); // 以黄金分割点为轴点,斐波那契中间项就是位于前一项与后一项的黄金分割点上
+            const mi = Math.floor((h - l) * 0.618) + l; // 以黄金分割点为轴点,斐波那契中间项就是位于前一项与后一项的黄金分割点上
             if (e < this.get(mi)) h = mi; //深入前半段[l, mi)继续查找
             else if (this.get(mi) < e) l = mi + 1; // 深入后半段(mi, hi)
             else return mi; // 在mi处命中
@@ -285,8 +285,15 @@ class Vector {
     // 平均情况：每经过一次比较，n缩至√n
     interpolationSearch(e, l, h) {
         while (l < h) { // 不变性：A[0, l) <= e < A[h, n)
-            let mi = l + (h - l) * (e - this.get(l)) / (this.get(h) - this.get(l)); // 求导？
-            e < this.get(mi) ? h = mi : l = mi + 1; // [l, mi) 或 (mi, hi)
+            let mi = Math.floor(l + (h - l) * (e - this.get(l)) / (this.get(h) - this.get(l))); // 求导？
+            if (mi < l) { // 如果middle判定为视野之外的数据，则终止循环（未找到或--l就是命中元素）
+                break;
+            }
+            if (e < this.get(mi)) {
+                h = mi; // [l, mi)
+            } else {
+                l = mi + 1; // (mi, hi)
+            }
         } // 出口时，A[l = h]为大于e的最小元素
         return --l; // 故l - 1即不大于e的元素的最大秩
     }
@@ -299,7 +306,7 @@ class Vector {
         const oldSize = this._size;
         let i = 1;
         while (i < this.size()) {
-            this.find(this.get(i, 0, i)) < 0 ? i++ : this.remove(i, 1);
+            this.find(this.get(i), 0, i) < 0 ? i++ : this.remove(i, i + 1);
         }
         return oldSize - this._size;
 
@@ -314,16 +321,18 @@ class Vector {
     * 适用对象：有序向量
     */
     uniquify() {
-        let cusor = 0;
+        let cursor = 0;
         let i = 0;
+        let string = '';
         while (i++ < this.size()) {
-            if (this.get(cusor) !== this.get(i)) {
-                this.put(++cusor, this.get(i));
+            if (this.get(cursor) !== this.get(i)) {
+                string += this.get(i) + ' ';
+                this.put(++cursor, this.get(i));
             }
         }
-        this._size = cusor;
+        this._size = cursor + 1;
         this.shrink();
-        return i - cusor;
+        return i - cursor;
     }
 
     /*
