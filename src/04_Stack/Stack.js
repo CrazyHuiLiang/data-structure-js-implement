@@ -1,6 +1,11 @@
 const Vector = require('../02_Vector/Vector');
 
 class Stack extends Vector {
+
+    empty() {
+        return this.size() === 0;
+    }
+
     push(e) {
         this.insert(this.size(), e);
     }
