@@ -7,7 +7,7 @@ for (let i = 0; i < 30; i++) {
 
 stack.printValues();
 console.log('the top of stack:', stack.top());
-for (let i = 0; i < stack.size(); i++) {
+for (let i = 0; i < 5; i++) {
     console.log('\tpop', stack.pop());
 }
 stack.printValues();
