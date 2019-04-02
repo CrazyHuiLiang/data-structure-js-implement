@@ -1,10 +1,8 @@
-const Vector = require('../02_Vector');
-
+const Vector = require('../02_Vector/Vector');
 
 class Stack extends Vector {
-    constructor(props) {
-        super(props);
-
+    push(e) {
+        this.insert(this.size(), e);
     }
 
     top() {
@@ -12,10 +10,10 @@ class Stack extends Vector {
     }
 
     pop() {
-        return this.remove(this.size() - 1, 1);
-    }
-
-    push(e) {
-        this.insert(this.size(), e);
+        const topElement = this.top();
+        this.remove(this.size() - 1, this.size());
+        return topElement;
     }
 }
+
+module.exports = Stack;
