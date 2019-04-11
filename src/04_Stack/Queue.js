@@ -6,6 +6,10 @@ class Queue extends List {
         this.insertAsLast(e);
     }
 
+    empty() {
+        return this._size === 0;
+    }
+
     // 获取最后尾端数据
     rear() {
         return this.last().data;
