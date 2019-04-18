@@ -1,20 +1,23 @@
-const Tree = require('../../src/05_Tree/Tree');
+const {BinaryTree} = require('../../src/05_Tree/Tree');
 const Stack = require('../../src/04_Stack/Stack');
-const tree = new Tree();
+
+
+const tree = new BinaryTree();
 const root = tree.root();
 root.data = 0;
 
 tree.insertAsLC(root, 1);
 tree.insertAsRC(root, 2);
-tree.insertAsLC(root.lChild, 3);
-tree.insertAsRC(root.lChild, 4);
-tree.insertAsLC(root.rChild, 5);
-tree.insertAsRC(root.rChild, 6);
+tree.insertAsLC(root.lc, 3);
+tree.insertAsRC(root.lc, 4);
+tree.insertAsLC(root.rc, 5);
+tree.insertAsRC(root.rc, 6);
 console.log('root:', tree.root().data);
 console.log('size:', tree.size());
 
 let printStack;
-function collect (e) {
+
+function collect(e) {
     printStack.push(e);
 }
 
